@@ -1,0 +1,30 @@
+{
+    "name": "irontec/crm-symfony-tools",
+    "license" : "MIT",
+    "version": "v0.0.1",
+    "keywords" : [],
+    "autoload" : {
+        "psr-4" : {
+            "SymfonyTools\\" : "/"
+        }
+    },
+    "type" : "library",
+    "homepage" : "https://git.irontec.com/irontec/symfony-tools",
+    "authors" : [
+    {
+            "name" : "Irontec",
+            "email" : "info@irontec.com",
+            "homepage" : "https://www.irontec.com"
+        }, {
+            "name" : "Daniel Rendon",
+            "email" : "ddniel16@gmail.com",
+            "homepage" : "https://github.com/ddniel16"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://git.irontec.com/irontec/symfony-tools"
+        }
+    ]
+}
