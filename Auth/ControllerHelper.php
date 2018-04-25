@@ -55,6 +55,7 @@ trait ControllerHelper
 
         $encode = array(
             'username' => $user->getUsername(),
+            'salt' => $user->getPassword(),
             'exp' => $this->getTokenExpiryDateTime()
         );
 
