@@ -3,11 +3,6 @@
 namespace SymfonyTools\Auth;
 
 /**
- * Metodos para la autenticación usando los bundle's:
-   - "friendsofsymfony/user-bundle": "^2.1",
-   - "jms/serializer": "^1.11",
-   - "jms/serializer-bundle": "^2.3",
-   - "lexik/jwt-authentication-bundle": "^2.4",
  * @author ddniel16
  */
 trait ControllerHelper
