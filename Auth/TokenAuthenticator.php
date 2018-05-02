@@ -72,7 +72,14 @@ class TokenAuthenticator
     )
     {
 
-        $data = $this->jwtEncoder->decode($credentials);
+        try {
+            $data = $this->jwtEncoder->decode($credentials);
+        } catch (\Exception $e) {
+            throw new \Exception(
+                'Invalid credentials',
+                Response::HTTP_CONFLICT
+            );
+        }
 
         if ($data === false) {
             throw new \Exception(
