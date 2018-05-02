@@ -57,7 +57,13 @@ class JsonRequestTransformer
     )
     {
 
-        $data = json_decode($request->getContent(), true);
+        $content = $request->getContent();
+
+        if (trim($content) === '') {
+            $content = '{}';
+        }
+
+        $data = json_decode($content, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             return false;
