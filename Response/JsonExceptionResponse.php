@@ -18,6 +18,13 @@ class JsonExceptionResponse
 
         $event->allowCustomResponseCode();
 
+        if ($event->getRequest()->getMethod() === 'OPTIONS') {
+            $response = new \Symfony\Component\HttpFoundation\JsonResponse(array());
+            $response->setStatusCode(200);
+            $event->setResponse($response);
+            return;
+        }
+
         $data = array();
 
         $exception = $event->getException();
