@@ -26,7 +26,7 @@ class Request
         $transform = \SymfonyTools\Request\JsonRequestTransformer::transformJsonBody($request);
 
         if ($transform === false) {
-            throw new \Exception('Unable to parse request.', 400);
+            \SymfonyTools\Services\Exception::error('Unable to parse request.', 400);
         }
 
         return $request;

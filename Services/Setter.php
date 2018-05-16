@@ -33,7 +33,7 @@ class Setter
         }
 
         if (empty($result)) {
-            throw new \Exception('Empty content', 400);
+            \SymfonyTools\Services\Exception::error('Empty content', 400);
         }
 
         return $result;
@@ -74,7 +74,7 @@ class Setter
                 'The parameters are missing: %s',
                 implode(', ', $fieldsError)
             );
-            throw new \Exception($msg, 409);
+            \SymfonyTools\Services\Exception::error($msg, 409);
         }
 
     }

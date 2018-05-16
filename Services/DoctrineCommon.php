@@ -46,11 +46,7 @@ class DoctrineCommon
             $em->flush();
 
         } catch (\Exception $e) {
-            $code = 500;
-            if ($e->getCode() < 300) {
-                $code = $e->getCode();
-            }
-            throw new \Exception($e->getMessage(), $code);
+            \SymfonyTools\Services\Exception::error($e->getMessage(), $e->getCode());
         }
 
     }
