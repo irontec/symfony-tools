@@ -58,15 +58,17 @@ class GetEntities
             $this->_entityNamespace . ':' . $entity
         );
 
-        $cQB = $repository->createQueryBuilder($entity);
+        $indent = substr($entity, -1);
+
+        $cQB = $repository->createQueryBuilder($indent);
 
         if (!empty($where)) {
-            $cQB = $this->_createWhere($cQB, $entity, $where);
+            $cQB = $this->_createWhere($cQB, $indent, $where);
         }
 
         if (!empty($order)) {
             foreach ($order as $key => $val) {
-                $cQB->orderBy($entity . '.' . $key, $val);
+                $cQB->orderBy($indent . '.' . $key, $val);
             }
         }
 
@@ -76,6 +78,26 @@ class GetEntities
         return $cQB->getQuery()->execute();
 
     }
+
+    public function fetchCount($entity, $where)
+    {
+
+        $repository = $this->_doctrine->getRepository(
+            $this->_entityNamespace . ':' . $entity
+        );
+
+        $indent = substr($entity, -1);
+
+        $cQB = $repository->createQueryBuilder($indent);
+
+        if (!empty($where)) {
+            $cQB = $this->_createWhere($cQB, $indent, $where);
+        }
+
+        return sizeof($cQB->getQuery()->getScalarResult());
+
+    }
+
 
     /**
      * Metodo custom para crear los where de las busquedas
