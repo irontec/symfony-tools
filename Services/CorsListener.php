@@ -29,7 +29,7 @@ class CorsListener
 
         $request = $event->getRequest();
         $method = $request->getRealMethod();
-        if ('OPTIONS' === $request->getMethod()) {
+        if ('OPTIONS' === $method) {
             $response = new Response();
             $response->headers->set('Access-Control-Allow-Credentials', 'true');
             $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
