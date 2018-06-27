@@ -14,7 +14,7 @@ class Exception
     public static function error(string $message, $code)
     {
 
-        if (empty($code) || $code < 300) {
+        if (empty($code) || $code < 100) {
             $code = 500;
         }
 
