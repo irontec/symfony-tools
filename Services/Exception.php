@@ -11,7 +11,7 @@ class Exception
      * @param int $code
      * @throws \Exception
      */
-    public static function error(string $message, $code)
+    public static function error(string $message, $code = 0)
     {
 
         if (empty($code) || $code < 100) {
