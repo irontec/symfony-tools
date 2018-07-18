@@ -72,8 +72,10 @@ class GetEntities
             }
         }
 
-        $cQB->setFirstResult($offset);
-        $cQB->setMaxResults($limit);
+        if ($limit != -1) {
+            $cQB->setFirstResult($offset);
+            $cQB->setMaxResults($limit);
+        }
 
         return $cQB->getQuery()->execute();
 
