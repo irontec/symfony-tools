@@ -14,22 +14,47 @@ class Setter
      * Limpia los campos autorizados en la request
      *
      * @param array $fields
+     * @param object $entity
      * @throws \Exception
      * @return array
      */
-    public function cleanFields(array $fields = array()):array
-    {
-
+    public function cleanFields(array $fields = array(), $entity = null):array  {
         $result = array();
+
         $request = \SymfonyTools\Request\Request::getRequest();
+        $properties = array();
+        $nullableRegex = "/(nullable)[\s]*(=)[\s]*(true|false)/";
+
+        if(!is_null($entity)){
+            $reflect = new \ReflectionClass($entity);
+            $reflectedProperties   = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED| \ReflectionProperty::IS_PRIVATE);
+
+            foreach ($reflectedProperties as $prop) {
+                if(preg_match($nullableRegex, $prop->getDocComment(),$match)){
+                    if(strtolower($match[3]) === "true"){
+                        $properties[$prop->getName()] = true;
+                    }else{
+                        $properties[$prop->getName()] = false;
+                    }
+                }else{
+                    continue;
+                }
+            }
+        }
 
         foreach ($fields as $field) {
             $val = trim($request->get($field, ''));
-            if ($val === '') {
-                continue;
-            }
+            $inProperties = in_array($field,$properties);
 
-            $result[$field] = trim($val);
+            if ($val === '' && $inProperties === true) {
+                if($properties[$field] === true){
+                    $result[$field] = null;
+                }else{
+                    continue;
+                }
+            }else{
+                $result[$field] = trim($val);
+            }
         }
 
         if (empty($result)) {
@@ -37,7 +62,6 @@ class Setter
         }
 
         return $result;
-
     }
 
     /**
