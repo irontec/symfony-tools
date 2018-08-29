@@ -98,7 +98,7 @@ class Setter
                 'The parameters are missing: %s',
                 implode(', ', $fieldsError)
             );
-            \SymfonyTools\Services\Exception::error($msg, 409);
+            \SymfonyTools\Services\Exception::error($msg, 400);
         }
 
     }
