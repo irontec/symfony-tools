@@ -68,7 +68,7 @@ class GetEntities
 
         if (!empty($order)) {
             foreach ($order as $key => $val) {
-                $cQB->orderBy($indent . '.' . $key, $val);
+                $cQB->addOrderBy($indent . '.' . $key, $val);
             }
         }
 
