@@ -77,14 +77,14 @@ class TokenAuthenticator
         } catch (\Exception $e) {
             throw new \Exception(
                 'Invalid credentials',
-                Response::HTTP_CONFLICT
+                Response::HTTP_UNAUTHORIZED
             );
         }
 
         if ($data === false) {
             throw new \Exception(
                 'Invalid credentials',
-                Response::HTTP_FORBIDDEN
+                Response::HTTP_UNAUTHORIZED
             );
         }
 
@@ -124,7 +124,7 @@ class TokenAuthenticator
         AuthenticationException $exception
     )
     {
-        throw new \Exception('Invalid credentials', Response::HTTP_FORBIDDEN);
+        throw new \Exception('Invalid credentials', Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -156,7 +156,7 @@ class TokenAuthenticator
     {
         throw new \Exception(
             'Invalid credentials',
-            Response::HTTP_FORBIDDEN
+            Response::HTTP_UNAUTHORIZED
         );
     }
 
